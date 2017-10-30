@@ -1,3 +1,5 @@
+;;(bpp 'x '(a (b c) d (x e f) c))
+;; Devuelve a b c d x (x e f)
 (defun bpp (param arbol)
 	(cond
 		((not (atom param)) nil) ((atom arbol) nil) ((null arbol) nil)
@@ -28,7 +30,8 @@
 		)
 	)
 )
-
+;;eg (potencia '(1 2 3 4))
+;; devuelve: (NIL (4) (3) (3 4) (2) (2 4) (2 3) (2 3 4) (1) (1 4) (1 3) (1 3 4) (1 2) (1 2 4) (1 2 3) (1 2 3 4))
 (defun potencia(lista)
 	(cond
 		((atom lista) nil)
@@ -44,6 +47,8 @@
 	)
 )
 
+;;eg (cartesiano '(1 2 3) '(3 4 5))
+;;devuelve: ((1 3) (1 4) (1 5) (2 3) (2 4) (2 5) (3 3) (3 4) (3 5))
 
 (defun cartesiano (A B)
 	(cond
