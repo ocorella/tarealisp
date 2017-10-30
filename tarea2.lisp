@@ -57,6 +57,16 @@
 	)
 )
 
+;devuelve todas las combinaciones entre una lista y un elemento
+(defun combinaciones (elemento lista)
+	(cond
+		((null lista) nil)
+		(t
+			(cons (list elemento (car lista)) (combinaciones elemento (cdr lista)))
+		)
+	)
+)
+
 ;;Encripta una hilera dada un alfabeto de entrada y otro de salida
 ;;(encripta '(o s c a r a p u) '(a b c d e f g h i j k l m n o p q r s t u v w x y z) '(a b c d e f g h i j k l m n o p q r s t u 0 1 2 3 4 5 6 7 8 9))
 ;; devuelve Hilera encriptada = (O S 7 0 H Q A F) Estado final = (U . F)
