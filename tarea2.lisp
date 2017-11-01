@@ -55,48 +55,16 @@
 ;; 1.2 (bap N A) -> el subárbol de A cuya raíz es N, nil si no existe
 ;;(bap 'x '(a b (c d e) (f (g h) i)))
 ;; Devuelve d; despliega a b c f d
-(defun bap (param arbol)
-	(let ((heads (getHeads arbol param))
-				(tails (getTails arbol)))
-		(cond
-			((member param heads) (and (printUntil param heads) (getTree param arbol)))
-			(t (and (bap param tails) (printUntil param heads)))
-		)
-	)
-)
-(defun printUntil (N L)
-	(cond ((null L) nil)
-				((eq (car L) N) (print (car L)))
-				(t (and (print (car L)) (printUntil N (cdr L))))
-	)
-)
-
-(defun getHeads (A N)
-	(cond ((null A) nil)
-				((null (car A) ) (getHeads (cdr A) N))
-				( (atom (car a)) (cons (car a) (getHeads (cdr A) N)))
-				( (not (atom (car a))) (cons (caar a) (getHeads (cdr A) N)))
-				(t (getHeads (cdr A) N))
-	)
-)
-
-(defun getTails (A)
-	(cond ((null A) nil)
-				((null (car A) ) (getTails (cdr A)))
-				( (atom (car a)) (cons '() (getTails (cdr A))))
-				((not (atom (car a))) (cons (cdar a) (getTails (cdr A))))
-				(t (getTails (cdr A)))
-	)
-)
-
-(defun getTree (N L)
+(defun bap (N L)
 	(cond
-				((atom (car L)) (cond ((eq N (car L)) (car A))
-															(t(getTree N (cdr L)))
+				((null L) nil)
+				((atom (car L)) (cond ((eq N (car L)) (print (car L)) (car L))
+															(t (print (car L)) (getTree N (cdr L)))
 												)
 				)
-				(t 							(cond ((eq N (caar L)) (car A))
-															(t(getTree N (cdr L)))
+				(t 							(cond ((eq N (caar L)) (car L))
+															(t (print (caar L))(getTree N (append (cdr L) (cdar L))))
+
 												)
 				)
 
@@ -201,24 +169,29 @@
 	(defparameter Hilera2 H)
 	(defparameter EstadoFinal Ef)
 	(defparameter Resultado2 '())
-	(girarAEstadoInicial)
+	(girarAeEstadoInicial)
+	(girarAsEstadoInicial)
 	(recorrerDecripta (list-length H))
 	(write-line "")
 	(format nil "Hilera decriptada = ~S" Resultado2)
 )
 
-(defun girarAEstadoInicial ()
-	(cond(
-		(not
-			(and
-				(eq (car EstadoFinal) (car AlfabetoEntrada2)) (eq (cdr EstadoFinal) (car AlfabetoSalida2))
-			)
-		)
-
+(defun girarAeEstadoInicial ()
+	(cond
+		(
+			(not (eq (car EstadoFinal) (car AlfabetoEntrada2)))
 			(setq AlfabetoEntrada2 (rotarN AlfabetoEntrada2 1))
+			(girarAeEstadoInicial))
+
+		(t (format nil "~S ~S" (car AlfabetoEntrada2) (car EstadoFinal)))
+	)
+)
+(defun girarAsEstadoInicial ()
+	(cond(
+			(not(eq (cdr EstadoFinal) (car AlfabetoSalida2)))
 			(setq AlfabetoSalida2 (rotarN AlfabetoSalida2 1))
-			(girarAEstadoInicial)
-		)
+			(girarAsEstadoInicial))
+		(t (format nil "~S ~S" (car AlfabetoSalida2) (cdr EstadoFinal)))
 	)
 )
 ;;Rota hasta llegar al valor
