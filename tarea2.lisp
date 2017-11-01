@@ -58,12 +58,12 @@
 (defun bap (N L)
 	(cond
 				((null L) nil)
-				((atom (car L)) (cond ((eq N (car L)) (print (car L)) (car L))
-															(t (print (car L)) (getTree N (cdr L)))
+				((atom (car L)) (cond ((eq N (car L)) (list (car L)))
+															(t (print (car L)) (bap N (cdr L)))
 												)
 				)
 				(t 							(cond ((eq N (caar L)) (car L))
-															(t (print (caar L))(getTree N (append (cdr L) (cdar L))))
+															(t (print (caar L)) (bap N (append (cdr L) (cdar L))))
 
 												)
 				)
