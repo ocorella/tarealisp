@@ -117,18 +117,21 @@
 
 ;;Encripta una hilera dada un alfabeto de entrada y otro de salida
 ;;(encripta '(o s c a r a p u) '(a b c d e f g h i j k l m n o p q r s t u v w x y z) '(a b c d e f g h i j k l m n o p q r s t u 0 1 2 3 4 5 6 7 8 9))
-;; devuelve Hilera encriptada = (O S 7 0 H Q A F) Estado final = (U . F)
+;;"Hilera encriptada = (Q M C J 2 O 9 4) Estado final = (U . 4)"
 
 (defun encripta (H Ae As)
 	(defparameter AlfabetoEntrada Ae)
-	(defparameter AlfabetoSalida As)
+	(defparameter AlfabetoSalida (reversa As))
 	(defparameter Hilera H)
 	(defparameter Resultado '())
 	(recorrer (list-length H))
 	(write-line "")
 	(format nil "Hilera encriptada = ~S Estado final = ~S" Resultado (cons (car AlfabetoEntrada) (car AlfabetoSalida)))
 )
-
+(defun reversa (l)
+   (cond ((null l) nil)
+         (t (append (reversa (cdr l))
+                    (cons (car l) nil)))))
 ;;Recorre la lista a encriptar
 (defun recorrer (cantidad)
 	(cond((> cantidad 0)
@@ -161,11 +164,11 @@
 
 
 ;;Encripta una hilera dada un alfabeto de entrada y otro de salida
-;;(decripta '(o s c a r a p u) '(a b c d e f g h i j k l m n o p q r s t u v w x y z) '(a b c d e f g h i j k l m n o p q r s t u 0 1 2 3 4 5 6 7 8 9))
-;; devuelve Hilera encriptada = (O S 7 0 H Q A F) Estado final = (U . F)
+;;(decripta '(Q M C J 2 O 9 4) '(a b c d e f g h i j k l m n o p q r s t u v w x y z) '(a b c d e f g h i j k l m n o p q r s t u 0 1 2 3 4 5 6 7 8 9) '(U . 4))
+;; devuelve Hilera decriptada = (OSCARAPU)
 (defun decripta (H Ae As Ef)
 	(defparameter AlfabetoEntrada2 Ae)
-	(defparameter AlfabetoSalida2 As)
+	(defparameter AlfabetoSalida2 (reversa As))
 	(defparameter Hilera2 H)
 	(defparameter EstadoFinal Ef)
 	(defparameter Resultado2 '())
@@ -177,21 +180,19 @@
 )
 
 (defun girarAeEstadoInicial ()
-	(cond
-		(
+	(cond(
 			(not (eq (car EstadoFinal) (car AlfabetoEntrada2)))
 			(setq AlfabetoEntrada2 (rotarN AlfabetoEntrada2 1))
-			(girarAeEstadoInicial))
-
-		(t (format nil "~S ~S" (car AlfabetoEntrada2) (car EstadoFinal)))
+			(girarAeEstadoInicial)
+			)
 	)
 )
 (defun girarAsEstadoInicial ()
 	(cond(
 			(not(eq (cdr EstadoFinal) (car AlfabetoSalida2)))
 			(setq AlfabetoSalida2 (rotarN AlfabetoSalida2 1))
-			(girarAsEstadoInicial))
-		(t (format nil "~S ~S" (car AlfabetoSalida2) (cdr EstadoFinal)))
+			(girarAsEstadoInicial)
+			)
 	)
 )
 ;;Rota hasta llegar al valor
