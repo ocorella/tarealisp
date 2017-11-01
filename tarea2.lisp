@@ -10,14 +10,10 @@
 ;; tarea2.lisp -- Segunda Tarea Programada: LISP,
 ;;------------------------------------------------------------------------------
 ;;
-;; 1. Funciones interesantes de procesamiento de árboles y conjuntos
-;;
-;; Suponga que existe una lista de acceso global de la forma ( .. (o p v) .. ),
-;; denominada "propiedades", en la que cada terna (o p v) representa una
-;; propiedad p con valor v de un objeto o. Supongo además que para cada objeto y
-;; propiedad pueden existir en esa lista varias ternas con valores distintos. Lo
-;; que no puede haber son ternas repetidas.
-;;
+;; Oscar Corella Quirós B32080
+;; Ricardo Apú Chinchilla B40399
+
+
 ;; 1.1 (bpp N A) -> el subárbol de A cuya raíz es N, nil si no existe
 ;;(bpp 'x '(a (b c) d (x e f) c))
 ;; Devuelve a b c d x (x e f)
